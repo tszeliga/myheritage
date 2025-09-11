@@ -120,4 +120,6 @@ The project uses TypeScript path aliases:
 - **Virtualisation**: For long list using https://tanstack.com/virtual/latest
 - **Improved search by address**: Using for example: https://docs.mapbox.com/
 - **Proper mapping response from server**: Currently some data is mocked like imageUrl or daysOnMarket
+- **Add tests**: unit tests (using vitest), component/e2e tests (using Playwright)
+- **Improive design**: 
 - **Add more TS, comments using JSDOC**: :)

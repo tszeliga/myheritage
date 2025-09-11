@@ -46,11 +46,11 @@ const HomeListingFilters: React.FC<HomeListingFiltersProps> = ({
               updateFilters({ sortBy: e.target.value as SortOption })
             }
           >
-          {SORT_OPTIONS_CONFIG.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+            {SORT_OPTIONS_CONFIG.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -66,11 +66,11 @@ const HomeListingFilters: React.FC<HomeListingFiltersProps> = ({
               })
             }
           >
-          {FILTER_OPTIONS_CONFIG.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+            {FILTER_OPTIONS_CONFIG.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>
