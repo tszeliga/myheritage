@@ -35,7 +35,7 @@ const Listing: React.FC = () => {
           </div>
         )}
 
-        <div className="w-full md:w-96 bg-white flex flex-col max-h-[calc(100vh-155px)] md:max-h-[calc(100vh-70px)]">
+        <div className="w-full md:w-96 bg-white flex flex-col max-h-[calc(100vh-155px)] sm:max-h-[calc(100vh-70px)]">
           <HomeListing />
         </div>
       </div>
