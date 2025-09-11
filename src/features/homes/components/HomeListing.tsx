@@ -1,32 +1,40 @@
+import {
+  fetchHomes,
+  selectError,
+  selectFilteredHomes,
+  selectFilters,
+  selectLoading,
+  selectTotalCount,
+  setFilters
+} from '@features/homes/store/homesSlice'
+import Spinner from '@shared/components/Spinner'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import React from 'react'
-import Spinner from '../../../shared/components/Spinner'
-import { useHomes } from '../hooks/useHomes'
+import type { HomeFilters } from '../types/home'
 import HomeItem from './HomeItem'
 import HomeItemBanner from './HomeItemBanner'
+import HomeListingEmpty from './HomeListingEmpty'
 import HomeListingError from './HomeListingError'
 import HomeListingFilters from './HomeListingFilters'
-import HomeListingEmpty from './HomeListingEmpty'
 
-interface HomeListingProps {
-  homesData: ReturnType<typeof useHomes>
-}
+const HomeListing: React.FC = () => {
+  const dispatch = useAppDispatch()
 
-const HomeListing: React.FC<HomeListingProps> = ({ homesData }) => {
-  const {
-    homes,
-    isLoading,
-    error,
-    refetch,
-    filters,
-    updateFilters,
-    totalCount
-  } = homesData
+  const homes = useAppSelector(selectFilteredHomes)
+  const isLoading = useAppSelector(selectLoading)
+  const error = useAppSelector(selectError)
+  const filters = useAppSelector(selectFilters)
+  const totalCount = useAppSelector(selectTotalCount)
 
-  const BANNER_INDEX = 1
-
-  if (isLoading) {
-    return <Spinner />
+  const refetch = () => {
+    dispatch(fetchHomes())
   }
+
+  const updateFilters = (newFilters: Partial<HomeFilters>) => {
+    dispatch(setFilters(newFilters))
+  }
+
+  const BANNER_POSITION = 3
 
   if (error) {
     return <HomeListingError error={error} onRefetch={refetch} />
@@ -40,13 +48,15 @@ const HomeListing: React.FC<HomeListingProps> = ({ homesData }) => {
         totalCount={totalCount}
       />
 
-      <div className="flex-1  min-h-0">
-        {homes.length > 0 ? (
-          <div className="divide-y divide-gray-200  py-2">
+      <div className="flex-1 min-h-0">
+        {isLoading ? (
+          <Spinner />
+        ) : homes.length > 0 ? (
+          <div className="divide-y divide-gray-200 py-2">
             {homes.map((home, index) => (
               <React.Fragment key={home.id}>
                 <HomeItem home={home} />
-                {index === BANNER_INDEX && <HomeItemBanner />}
+                {index === BANNER_POSITION - 2 && <HomeItemBanner />}
               </React.Fragment>
             ))}
           </div>

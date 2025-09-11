@@ -3,7 +3,7 @@ import axios, {
   type AxiosRequestConfig,
   type AxiosResponse
 } from 'axios'
-import { appConfig } from '../../utils/appConfig'
+import { appConfig } from '@shared/utils/appConfig'
 
 class HttpClient {
   private client: AxiosInstance
@@ -21,28 +21,6 @@ class HttpClient {
     return this.client.get<T>(url, config)
   }
 
-  async post<T>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> {
-    return this.client.post<T>(url, data, config)
-  }
-
-  async put<T>(
-    url: string,
-    data?: unknown,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> {
-    return this.client.put<T>(url, data, config)
-  }
-
-  async delete<T>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> {
-    return this.client.delete<T>(url, config)
-  }
 
 }
 

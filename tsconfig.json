@@ -1,7 +1,23 @@
+
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "jsx": "react-jsx",                     // React 17+ JSX transform
+    "strict": true,                          // Enable all strict checks
+    "esModuleInterop": true,                // Default import interoperability
+    "allowSyntheticDefaultImports": true,   // Allows default import of CJS modules
+    "skipLibCheck": true,                    // Ignore type errors in node_modules
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",                          // Required for path mapping
+    "paths": {                               // Aliases example
+      "@shared/*": ["./src/shared/*"],
+      "@features/*": ["./src/features/*"],
+      "@store/*": ["./src/store/*"],
+      "@utils/*": ["./src/utils/*"]
+    },
+    "resolveJsonModule": true,               // Allows importing JSON files
+    "isolatedModules": true,                 // Required for Vite / ESBuild
+    "noEmit": true                           // Don’t emit JS, Vite handles build
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

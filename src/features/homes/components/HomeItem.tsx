@@ -1,11 +1,14 @@
+import type { Home } from '@features/homes/types/home'
+import { LISTING_STATUS } from '@features/homes/types/home'
 import React from 'react'
-import type { Home } from './../types/home'
 
 type HomeItemProps = {
   home: Home
 }
 
 const HomeItem: React.FC<HomeItemProps> = ({ home }) => {
+  const badgeBaseClasses = 'text-xs font-medium px-2 py-1 rounded'
+
   return (
     <div className="p-4 m-4 rounded-xl shadow-md hover:bg-gray-50 cursor-pointer transition-colors">
       <div className="flex gap-4">
@@ -24,16 +27,20 @@ const HomeItem: React.FC<HomeItemProps> = ({ home }) => {
             </h3>
             <div className="flex gap-2">
               <span
-                className={`text-xs font-medium px-2 py-1 rounded ${
-                  home.listingStatus === 'active'
+                className={`${badgeBaseClasses} ${
+                  home.listingStatus === LISTING_STATUS.ACTIVE
                     ? 'bg-green-100 text-green-800'
                     : 'bg-red-100 text-red-800'
                 }`}
               >
-                {home.listingStatus === 'active' ? 'Active' : 'Sold'}
+                {home.listingStatus === LISTING_STATUS.ACTIVE
+                  ? 'Active'
+                  : 'Sold'}
               </span>
               {home.isNewListing && (
-                <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
+                <span
+                  className={`${badgeBaseClasses} bg-blue-100 text-blue-800`}
+                >
                   New
                 </span>
               )}

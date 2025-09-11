@@ -1,5 +1,21 @@
+import type {
+  FilterListingStatus,
+  HomeFilters,
+  SortOption
+} from '@features/homes/types/home'
+import { LISTING_STATUS, SORT_OPTIONS } from '@features/homes/types/home'
 import React from 'react'
-import type { HomeFilters } from '../types/home'
+
+const SORT_OPTIONS_CONFIG = [
+  { value: SORT_OPTIONS.NEWEST, label: 'Newest' },
+  { value: SORT_OPTIONS.OLDEST, label: 'Oldest' }
+] as const
+
+const FILTER_OPTIONS_CONFIG = [
+  { value: LISTING_STATUS.ACTIVE, label: 'Active' },
+  { value: LISTING_STATUS.SOLD, label: 'Sold' },
+  { value: LISTING_STATUS.ALL, label: 'All' }
+] as const
 
 interface HomeListingFiltersProps {
   filters: HomeFilters
@@ -20,30 +36,43 @@ const HomeListingFilters: React.FC<HomeListingFiltersProps> = ({
       <p className="text-sm text-gray-600 mb-4">{totalCount} listings found.</p>
 
       <div className="flex gap-2">
-        <select
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white"
-          value={filters.sortBy || 'newest'}
-          onChange={e =>
-            updateFilters({ sortBy: e.target.value as 'newest' | 'oldest' })
-          }
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </select>
+        <div className="flex flex-col">
+          <select
+            id="sort-by"
+            name="sortBy"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white"
+            value={filters.sortBy || SORT_OPTIONS.NEWEST}
+            onChange={e =>
+              updateFilters({ sortBy: e.target.value as SortOption })
+            }
+          >
+          {SORT_OPTIONS_CONFIG.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+          </select>
+        </div>
 
-        <select
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white"
-          value={filters.listingStatus || 'all'}
-          onChange={e =>
-            updateFilters({
-              listingStatus: e.target.value as 'active' | 'sold' | 'all'
-            })
-          }
-        >
-          <option value="active">Active</option>
-          <option value="sold">Sold</option>
-          <option value="all">All</option>
-        </select>
+        <div className="flex flex-col">
+          <select
+            id="filter-by"
+            name="filterBy"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white"
+            value={filters.filterBy || LISTING_STATUS.ALL}
+            onChange={e =>
+              updateFilters({
+                filterBy: e.target.value as FilterListingStatus
+              })
+            }
+          >
+          {FILTER_OPTIONS_CONFIG.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+          </select>
+        </div>
       </div>
     </div>
   )

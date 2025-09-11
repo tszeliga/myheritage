@@ -1,15 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Listing from '../features/homes/pages/Listing'
+import Listing from '@features/homes/pages/Listing'
+import { createHashRouter } from 'react-router-dom'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <Listing />
-  },
-  {
-    path: '/listing',
-    element: <Listing />
   }
 ])
-
-export default router

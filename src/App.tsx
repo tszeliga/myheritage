@@ -1,11 +1,7 @@
-import { Outlet } from 'react-router-dom'
-
-function AppContent() {
-  return <Outlet />
-}
+import Listing from '@features/homes/pages/Listing'
 
 function App() {
-  return <AppContent />
+  return <Listing />
 }
 
 export default App
